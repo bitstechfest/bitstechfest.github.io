@@ -1,8 +1,10 @@
 const API_LINK = "";
-const message_element = document.querySelector("#message");
+const message_container = document.querySelector("#message_container");
+const dots = document.querySelectorAll(".dot");
 const img_element = document.querySelector("#img");
 const submit_button = document.querySelector("#submit-button");
 const form = document.querySelector("#form");
+let myInterval;
 
 async function load_pic(url, formDataString) {
 	const options = {
@@ -11,14 +13,21 @@ async function load_pic(url, formDataString) {
 
 	const response = await fetch(url + "?" + formDataString, options)
 
+	console.log(response.status);
+
 	const imageBlob = await response.blob()
 	const imageBase64 = URL.createObjectURL(imageBlob);
 
 	img_element.src = imageBase64;
-	img_element.style.opacity = "1";
+	// img_element.style.opacity = "1";
+
+	// message_container.style.display = "none";
+	message_container.style.opacity = "0";
+	submit_button.disabled = false;
+	img_element.classList.remove("out_of_focus");
+	clearInterval(myInterval);
 
 	download(url, imageBase64);
-	message_element.style.display = "none";
 }
 
 function download(url, data) {
@@ -33,13 +42,34 @@ function download(url, data) {
 	a.remove();
 }
 
+let count = 0;
+
 function get_badge(e) {
 	e.preventDefault(); // Prevent the default form submission
 
-	message_element.style.display = "block";
-	message_element.textContent = "Generating ...";
+	message_container.style.opacity = "1";
+	// message_container.style.display = "block";
 
-	img_element.style.opacity = "0";
+	img_element.classList.add("out_of_focus");
+
+	myInterval = window.setInterval( function() {
+		if ( count == dots.length ) {
+			setTimeout(() => {
+				dots.forEach(dot => {
+					dot.style.opacity = "0";
+				});
+				count = 0;
+			}, 600);
+		}
+		else {
+			dots[count].style.opacity = "1";
+			count++;
+		}
+		},
+		300
+	);
+
+	// img_element.style.opacity = "0";
 
 	submit_button.disabled = true;
 
@@ -53,66 +83,21 @@ function get_badge(e) {
 	load_pic("https://btf.pythonanywhere.com/badge-going", keyValuePairs.join("&"));
 }
 
-function submit_to_gsheets(e) {
-	e.preventDefault(); // Prevent the default form submission
-
-	message_element.textContent = "Submitting..";
-	message_element.style.display = "block";
-
-	submit_button.disabled = true;
-
-	// Collect the form data
-	const formData = new FormData(this);
-	let keyValuePairs = [];
-	for (let pair of formData.entries()) {
-		keyValuePairs.push(pair[0] + "=" + pair[1]);
-	}
-
-	const formDataString = keyValuePairs.join("&");
-
-	// Send a POST request to your Google Apps Script
-	fetch(
-		API_LINK,
-		{
-			redirect: "follow",
-			method: "POST",
-			body: formDataString,
-			headers: {
-				"Content-Type": "text/plain;charset=utf-8",
-			},
-		}
-	)
-		.then(function (response) {
-			// Check if the request was successful
-			if (response) {
-				return response; // Assuming your script returns JSON response
-			} else {
-				throw new Error("Failed to submit the form.");
-			}
-		})
-		.then(function (data) {
-			// Display a success message
-			message_element.textContent =
-				"Data submitted successfully!";
-			message_element.style.display = "block";
-			message_element.style.backgroundColor = "green";
-			message_element.style.color = "beige";
-			submit_button.disabled = false;
-			form.reset();
-
-			setTimeout(function () {
-				message_element.textContent = "";
-				message_element.style.display = "none";
-			}, 2600);
-		})
-		.catch(function (error) {
-			// Handle errors, you can display an error message here
-			console.error(error);
-			message_element.textContent =
-				"An error occurred while submitting the form." + ": " + error;
-			message_element.style.display = "block";
-		});
-}
-
 form.addEventListener("submit", get_badge);
+
+
+submit_button.disabled = true;
+submit_button.classList.add("disabled");
+document.querySelectorAll('.required').forEach(inputElt => {
+	inputElt.addEventListener("input", function () {
+		if (this.value === "" && submit_button.disabled===false) {
+			submit_button.disabled = true;
+			submit_button.classList.add("disabled");
+			return
+		}
+		submit_button.disabled = false;
+		submit_button.classList.remove("disabled");
+	})
+});
+
 // form.addEventListener("submit", submit_to_gsheets);

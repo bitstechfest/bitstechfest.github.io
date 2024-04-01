@@ -2,51 +2,64 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="bulma.min.css" /> <!-- https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css -->
-    <link rel="stylesheet" href="main.css" />
+	<title>BITS Tech Fest Badge Generator</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="main.css" />
+
+    <link rel="preload" href="./fonts/ClashDisplay/ClashDisplay-Semibold.woff2" as="font" crossorigin />
+    <link rel="preload" href="./fonts/ClashDisplay/ClashDisplay-Medium.woff2" as="font" crossorigin />
+    <link rel="preload" href="./assets/badge-going.jpg" as="image" />
 </head>
 
 <body>
-    <section class="hero is-primary is-bold">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">Badge Generator</h1>
+	<div id="container">
+		<div id="preview">
+            <img id="img" src="./assets/badge-going.jpg" alt="Badge">
+			<div id="message_container" class="centered">
+                <div id="message" class="centered">
+                    Generating
+                    <span class="dot">.</span>
+                    <span class="dot">.</span>
+                    <span class="dot">.</span>
+                </div>
             </div>
-        </div>
-    </section>
-    <form id="form" class="container m-4 pl-4" method="POST">
+            
+		</div>
+		<div id="content">
+			<!-- <h3>
+				Badge Generator
+			</h3> -->
 
-        <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-                <input class="input" type="text" placeholder="Full Name" name="Name" value = ""  />
-            </div>
-        </div>
+            <form id="form" class="container m-4 pl-4" method="POST">
 
-        <div class="field">
-            <label class="label">Institution</label>
-            <div class="control">
-                <input class="input" type="text" placeholder="School/University" name="Institution" value = "BITS Pilani Dubai Campus" />
-            </div>
-        </div>
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input required" type="text" placeholder="Full Name" name="Name" value = ""  />
+                    </div>
+                </div>
+        
+                <div class="field">
+                    <label class="label">Institution</label>
+                    <div class="control">
+                        <input class="input required" type="text" placeholder="School/University" name="Institution" value = "BITS Pilani Dubai Campus" />
+                    </div>
+                </div>
+        
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-primary" type="submit" id="submit-button">
+                            Generate Badge
+                        </button>
+                    </div>
+                </div>
+            </form>
+		</div>
 
-        <div class="field is-grouped">
-            <div class="control">
-                <button class="button is-primary" type="submit" id="submit-button">
-                    Generate Badge
-                </button>
-            </div>
-        </div>
-    </form>
+	</div>
 
-    <div id="message"></div>
-
-    <div id="img_container">
-        <img id="img" src="#"></img>
-    </div>
-    
-
-    <script src="api.js" defer></script>
+	<script src="api.js" defer></script>
+	<link rel="preconnect" href="https://btf.pythonanywhere.com/" />
 </body>
 
 </html>
