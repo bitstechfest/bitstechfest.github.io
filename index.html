@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="bulma.min.css" /> <!-- https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css -->
+    <link rel="stylesheet" href="main.css" />
+</head>
+
+<body>
+    <section class="hero is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">Badge Generator</h1>
+            </div>
+        </div>
+    </section>
+    <form id="form" class="container m-4 pl-4" method="POST">
+
+        <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Full Name" name="Name" value = ""  />
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Institution</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="School/University" name="Institution" value = "BITS Pilani Dubai Campus" />
+            </div>
+        </div>
+
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary" type="submit" id="submit-button">
+                    Generate Badge
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div id="message"></div>
+
+    <div id="img_container">
+        <img id="img" src="#"></img>
+    </div>
+    
+
+    <script src="api.js" defer></script>
+</body>
+
+</html>
