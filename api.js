@@ -36,11 +36,12 @@ async function load_pic(url, formDataString) {
 	img_element.classList.remove("out_of_focus");
 
 	submit_button.disabled = false;
+	share_button.disabled = false;
 
 	clearInterval(myInterval);
 
 	setTimeout(
-		async function() {
+		async function () {
 			await export_image(url, imageBase64, imageBlob)
 		},
 		1 * 1000
@@ -72,7 +73,7 @@ async function export_image(url, imageBase64, imageBlob) {
 			download(url, imageBase64);
 		}
 	} catch (e) {
-		document.querySelector("#console").innerHTML=e;
+		document.querySelector("#console").innerHTML = e;
 		console.log(e);
 	}
 }
@@ -125,27 +126,47 @@ function get_badge(e) {
 	// Collect the form data
 	const formData = new FormData(this);
 	let keyValuePairs = [];
+	let key;
+	let value;
 	for (let pair of formData.entries()) {
-		keyValuePairs.push(pair[0][0].toLowerCase() + "=" + pair[1].split(" ").join("+"));
+		key = pair[0][0].toLowerCase();
+		value = (
+			cleanup(pair[1])
+				.split(" ")
+				.join("+")
+		);
+		keyValuePairs.push(key + "=" + value);
 	}
 
 	load_pic(url, keyValuePairs.join("&"));
 }
 
+function cleanup(string) {
+	return (
+		string
+			.replace("  ", " ")
+			.trim()
+	)
+}
+
 form.addEventListener("submit", get_badge);
 
 
+share_button.disabled = true;
 submit_button.disabled = true;
+
+share_button.classList.add("disabled");
 submit_button.classList.add("disabled");
+
 document.querySelectorAll('.required').forEach(inputElt => {
 	inputElt.addEventListener("input", function () {
-		if (this.value === "" && submit_button.disabled === false) {
+		if (cleanup(this.value) === "" && submit_button.disabled === false) {
 			submit_button.disabled = true;
 			submit_button.classList.add("disabled");
-			return
+		} else {
+			submit_button.disabled = false;
+			submit_button.classList.remove("disabled");
 		}
-		submit_button.disabled = false;
-		submit_button.classList.remove("disabled");
 	})
 });
 
