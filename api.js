@@ -33,18 +33,29 @@ async function load_pic(url, formDataString) {
 
 	// message_container.style.display = "none";
 	message_container.style.opacity = "0";
+	
 	img_element.classList.remove("out_of_focus");
+	document.getElementById('content').classList.add("out_of_focus");
+	share_container.classList.add("bring-front");
 
 	submit_button.disabled = false;
 	share_button.disabled = false;
 
 	clearInterval(myInterval);
 
+	// setTimeout(
+	// 	async function () {
+	// 		await export_image(url, imageBase64, imageBlob)
+	// 	},
+	// 	1 * 1000
+	// )
+
 	setTimeout(
 		async function () {
-			await export_image(url, imageBase64, imageBlob)
+			share_container.classList.remove("hidden");
+			
 		},
-		1 * 1000
+		1000
 	)
 
 	share_button.classList.remove("disabled");
@@ -118,7 +129,6 @@ function get_badge(e) {
 	},
 		300
 	);
-
 	// img_element.style.opacity = "0";
 
 	submit_button.disabled = true;
@@ -149,6 +159,7 @@ function cleanup(string) {
 	)
 }
 
+
 form.addEventListener("submit", get_badge);
 
 
@@ -175,6 +186,9 @@ document.querySelectorAll('.required').forEach(inputElt => {
 // 	share_container.classList.remove("hidden");
 // }
 
-// function hide_share_popup() {
-// 	share_container.classList.add("hidden");
-// }
+function hide_share_popup() {
+	share_container.classList.add("hidden");
+	share_container.classList.remove("bring-front");
+	document.getElementById('content').classList.remove("out_of_focus");
+
+}

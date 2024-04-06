@@ -35,6 +35,21 @@ html {
 	filter: blur(0.5em) brightness(0.4);
 }
 
+.out_of_focus {
+	filter: blur(0.5em) brightness(0.4);
+	transition: filter 0.5s ease;
+}
+
+#share_message {
+	font-weight: bold;
+	color: white;
+	padding: 8px;
+	border-color: aquamarine;
+	order: 2;
+	width: 100%;
+	height: 100%;
+}
+
 #message_container, #share_container {
 	/* margin: 20px; */
 	font-weight: bold;
@@ -156,6 +171,7 @@ body {
 
 @media screen and (orientation: portrait) {
 	#container {
+		position: relative;
 		flex-direction: column;
 	}
 
@@ -165,6 +181,16 @@ body {
 	}
 
 	#content {
+		width: 90%;
+		max-height: 50%;
+		position: relative;
+		transition: filter 0.5s ease-out;
+	}
+
+	#share_container {
+		position: absolute;
+		bottom: 0;
+		justify-content: center;
 		width: 90%;
 		max-height: 50%;
 	}
@@ -185,6 +211,15 @@ body {
 		width: 60%;
 		/* height: 90%; */
 	}
+
+	#share_container {
+		position: absolute;
+		top: 25%;
+		bottom: 25%;
+		right: 0; 
+		width: 50%; 
+		height: 50%; 
+}
 }
 
 #content {
@@ -195,6 +230,10 @@ body {
 #preview {
 	position: relative;
 	color: hsla(0, 0%, 100%, 90%);
+}
+
+.bring-front {
+	z-index: 3;
 }
 
 .centered {

@@ -26,9 +26,6 @@
             </div>
         </div>
         <div id="content">
-            <!-- <h3>
-				Badge Generator
-			</h3> -->
 
             <form id="form" class="container m-4 pl-4" method="POST">
 
@@ -53,30 +50,34 @@
                         <button class="button is-primary blue disabled" type="submit" id="submit-button">
                             Generate
                         </button>
-                        <button class="button is-primary blue disabled share" type="button" id="share_button"
-                            onclick='export_image(url, imageBase64, imageBlob)'>
+                        <button class="button is-primary blue disabled share" type="button" id="share_button" onclick='export_image(url, imageBase64, imageBlob)'>
                             <img style="width:1em; height:100%; margin: auto;" src="assets/share.svg">
                         </button>
                     </div>
                 </div>
             </form>
         </div>
-        <!-- <div id="share_container" class="centered hidden">
-            <div class="centered">
+        <div id="share_container" class="hidden">
+            <!-- <div id="share_preview">
+                <img id="img" src="./assets/badge-going.jpg" alt="Badge">
+            </div> -->
+            <div id="share_message" class="centered">
                 <span>Looks great! Let's share it?</span>
                 <br/>
-                <div style="width: 100%">
-                    <button class="button is-primary grey" onclick="hide_share_popup()">No.</button>
-                    <button class="button is-primary blue share">Yes!</button>
+                <div class="field is-grouped">
+                    <div class="control" style="display: flex; gap: 0;">
+                        <button class="button is-primary blue share" onclick='export_image(url, imageBase64, imageBlob)'>Yes!</button>
+                        <button class="button is-primary grey" onclick="hide_share_popup()">No.</button>
+                    </div>
                 </div>
             </div>
-        </div> -->
+        </div> 
         <!-- <div class="centered">
             <div class="centered">
                 <span id="console">Testing</span>
             </div>
-        </div> -->
-    </div>
+        </div>
+    </div> -->
 
     <script src="api.js" defer></script>
     <link rel="preconnect" href="https://btf.pythonanywhere.com/" />
