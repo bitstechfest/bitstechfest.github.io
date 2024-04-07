@@ -2,85 +2,79 @@
 <html>
 
 <head>
-    <title>BITS Tech Fest Badge Generator</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="main.css" />
+	<title>BITS Tech Fest Badge Generator</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="main.css" />
 
-    <link rel="preload" href="./fonts/ClashDisplay/ClashDisplay-Semibold.woff2" as="font" crossorigin />
-    <link rel="preload" href="./fonts/ClashDisplay/ClashDisplay-Medium.woff2" as="font" crossorigin />
-    <link rel="preload" href="./assets/badge-going.jpg" as="image" />
+	<link rel="preload" href="./fonts/ClashDisplay/ClashDisplay-Semibold.woff2" as="font" crossorigin />
+	<link rel="preload" href="./fonts/ClashDisplay/ClashDisplay-Medium.woff2" as="font" crossorigin />
+	<link rel="preload" href="./assets/badge-going.jpg" as="image" />
 </head>
 
 <body>
-    <div id="container">
-        <div id="preview">
-            <img id="img" src="./assets/badge-going.jpg" alt="Badge">
-            <div id="message_container" class="centered">
-                <div id="message" class="centered">
-                    Generating
-                    <br />
-                    <span class="dot">.</span>
-                    <span class="dot">.</span>
-                    <span class="dot">.</span>
-                </div>
-            </div>
-        </div>
-        <div id="content">
+	<div id="container">
+		<div id="preview">
+			<img id="img" src="./assets/badge-going.jpg" alt="Badge">
+			<div id="message_container" class="centered">
+				<div id="message" class="centered">
+					Generating
+					<br />
+					<span class="dot">.</span>
+					<span class="dot">.</span>
+					<span class="dot">.</span>
+				</div>
+			</div>
+		</div>
+		<div id="content">
 
-            <form id="form" class="container m-4 pl-4" method="POST">
+			<form id="form" class="container m-4 pl-4" method="POST">
 
-                <div class="field">
-                    <label class="label">Name</label>
-                    <div class="control">
-                        <input id="name_input" class="input required" type="text" placeholder="Full Name" name="Name"
-                            value="" />
-                    </div>
-                </div>
+				<div class="field">
+					<label class="label">Name</label>
+					<div class="control">
+						<input id="name_input" class="input required" type="text" placeholder="Full Name" name="Name"
+							value="" />
+					</div>
+				</div>
 
-                <div class="field">
-                    <label class="label">Institution</label>
-                    <div class="control">
-                        <input class="input required" type="text" placeholder="School/University" name="Institution"
-                            value="BITS Pilani Dubai Campus" />
-                    </div>
-                </div>
+				<div class="field">
+					<label class="label">Institution</label>
+					<div class="control">
+						<input class="input required" type="text" placeholder="School/University" name="Institution"
+							value="BITS Pilani Dubai Campus" />
+					</div>
+				</div>
 
-                <div class="field is-grouped">
-                    <div class="control" style="display: flex; gap: 0;">
-                        <button class="button is-primary blue disabled" type="submit" id="submit-button">
-                            Generate
-                        </button>
-                        <button class="button is-primary blue disabled share" type="button" id="share_button" onclick='export_image(url, imageBase64, imageBlob)'>
-                            <img style="width:1em; height:100%; margin: auto;" src="assets/share.svg">
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div id="share_container" class="hidden">
-            <!-- <div id="share_preview">
-                <img id="img" src="./assets/badge-going.jpg" alt="Badge">
-            </div> -->
-            <div id="share_message" class="centered">
-                <span>Looks great! Let's share it?</span>
-                <br/>
-                <div class="field is-grouped">
-                    <div class="control" style="display: flex; gap: 0;">
-                        <button class="button is-primary blue share" onclick='export_image(url, imageBase64, imageBlob)'>Yes!</button>
-                        <button class="button is-primary grey" onclick="hide_share_popup()">No.</button>
-                    </div>
-                </div>
-            </div>
-        </div> 
-        <!-- <div class="centered">
-            <div class="centered">
-                <span id="console">Testing</span>
-            </div>
-        </div>
-    </div> -->
-
-    <script src="api.js" defer></script>
-    <link rel="preconnect" href="https://btf.pythonanywhere.com/" />
+				<div class="field is-grouped">
+					<div class="control" style="display: flex; gap: 0;">
+						<button class="button is-primary blue disabled" type="submit" id="submit-button">
+							Generate
+						</button>
+						<button class="button is-primary blue disabled share" type="button" id="share_button"
+							onclick='export_image(url, imageBase64, imageBlob)'>
+							<img style="width:1em; height:100%; margin: auto;" src="assets/share.svg">
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div id="share_container" class="hidden">
+			<div id="share_message" class="centered">
+				<span>Looks great!</span>
+				<br />
+				<span>Let's share it?</span>
+				<br />
+				<div class="field is-grouped">
+					<div class="control" style="display: flex; gap: 0;">
+						<button class="button is-primary grey" onclick="hide_share_popup()">No.</button>
+						<button class="button is-primary blue share"
+							onclick='export_image(url, imageBase64, imageBlob)'>Yes!</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="api.js" defer></script>
+		<link rel="preconnect" href="https://btf.pythonanywhere.com/" />
 </body>
 
 </html>

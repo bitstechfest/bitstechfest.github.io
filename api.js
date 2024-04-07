@@ -33,20 +33,14 @@ async function load_pic(url, formDataString) {
 
 	// message_container.style.display = "none";
 	message_container.style.opacity = "0";
-	
+
 	img_element.classList.remove("out_of_focus");
 
 	submit_button.disabled = false;
 	share_button.disabled = false;
 
 	clearInterval(myInterval);
-
-	// setTimeout(
-	// 	async function () {
-	// 		await export_image(url, imageBase64, imageBlob)
-	// 	},
-	// 	1 * 1000
-	// )
+	
 	setTimeout(
 		async function () {
 			img_element.classList.remove("out_of_focus");
@@ -54,13 +48,17 @@ async function load_pic(url, formDataString) {
 		1000
 	)
 
-	setTimeout(
-		async function () {
-			document.getElementById('content').classList.add("out_of_focus");
-			share_container.classList.add("bring-front");
-		},
-		150
-	)
+	if (first_time_generating) {
+		first_time_generating = false;
+
+		setTimeout(
+			async function () {
+				document.getElementById('content').classList.add("out_of_focus");
+				share_container.classList.add("bring-front");
+			},
+			150
+		)
+	}
 
 
 	share_button.classList.remove("disabled");
@@ -112,7 +110,6 @@ function get_badge(e) {
 	e.preventDefault(); // Prevent the default form submission
 
 	share_button.classList.add("disabled");
-
 	message_container.style.opacity = "1";
 	// message_container.style.display = "block";
 
@@ -134,7 +131,7 @@ function get_badge(e) {
 	},
 		300
 	);
-	
+
 	// img_element.style.opacity = "0";
 
 	submit_button.disabled = true;
