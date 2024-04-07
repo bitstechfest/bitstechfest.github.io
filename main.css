@@ -31,9 +31,9 @@ html {
 	transition: filter 0.8s ease;
 }
 
-#img.out_of_focus {
+/* #img.out_of_focus {
 	filter: blur(0.5em) brightness(0.4);
-}
+} */
 
 .out_of_focus {
 	filter: blur(0.5em) brightness(0.4);
@@ -50,7 +50,8 @@ html {
 	height: 80%;
 }
 
-#message_container, #share_container {
+#message_container,
+#share_container {
 	/* margin: 20px; */
 	font-weight: bold;
 	color: white;
@@ -72,25 +73,21 @@ html {
 	border-radius: 2ex;
 }
 
-#share_container {
-	font-size: 1.8em;
-	background: hsla(0, 0%, 10%, 0.5);
-	backdrop-filter: blur(0.2em);
-}
-
 #message_container,
-.dot
-{
+.dot {
 	opacity: 0;
 	will-change: opacity;
 	transition: opacity 0.5s ease;
 }
 
-#share_container
-{
+#share_container {
 	opacity: 1;
 	will-change: opacity;
-	transition: opacity 0.8s ease;
+	transition: opacity 0.5s ease;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 1.8em;
 }
 
 .hidden {
@@ -197,7 +194,7 @@ body {
 		bottom: 0;
 		justify-content: center;
 		width: 90%;
-		max-height: 55%;
+		max-height: 45%;
 	}
 }
 
@@ -221,10 +218,10 @@ body {
 		position: absolute;
 		top: 25%;
 		bottom: 25%;
-		right: 0; 
-		width: 50%; 
-		height: 50%; 
-}
+		right: 0;
+		width: 50%;
+		height: 50%;
+	}
 }
 
 #content {
@@ -275,9 +272,9 @@ button.grey {
 /* #share_button {
 	font-size: 2em;
 	position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	margin: 0 auto;
 } */
 
@@ -332,4 +329,3 @@ input,
 	margin: 1em auto;
 	width: 80%;
 }
-
