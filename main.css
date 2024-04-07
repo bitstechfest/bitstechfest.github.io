@@ -28,11 +28,26 @@ html {
 	height: 100%;
 
 	will-change: filter;
-	transition: filter 0.5s ease;
+	transition: filter 0.8s ease;
 }
 
 #img.out_of_focus {
 	filter: blur(0.5em) brightness(0.4);
+}
+
+.out_of_focus {
+	filter: blur(0.5em) brightness(0.4);
+	transition: filter 0.8s ease;
+}
+
+#share_message {
+	font-weight: bold;
+	color: white;
+	padding: 8px;
+	border-color: aquamarine;
+	order: 2;
+	width: 100%;
+	height: 80%;
 }
 
 #message_container, #share_container {
@@ -41,7 +56,6 @@ html {
 	color: white;
 	padding: 8px;
 	border-color: aquamarine;
-
 	width: 100%;
 	height: 100%;
 	/* transform: translateX(-50%) translateY(0%) rotate(-90deg); */
@@ -59,18 +73,24 @@ html {
 }
 
 #share_container {
-	font-size: 2em;
-	background: hsla(0, 0%, 0%, 0.5);
-	backdrop-filter: blur(0.5em);
+	font-size: 1.8em;
+	background: hsla(0, 0%, 10%, 0.5);
+	backdrop-filter: blur(0.2em);
 }
 
 #message_container,
-.dot,
-#share_container
+.dot
 {
 	opacity: 0;
 	will-change: opacity;
 	transition: opacity 0.5s ease;
+}
+
+#share_container
+{
+	opacity: 1;
+	will-change: opacity;
+	transition: opacity 0.8s ease;
 }
 
 .hidden {
@@ -156,6 +176,7 @@ body {
 
 @media screen and (orientation: portrait) {
 	#container {
+		position: relative;
 		flex-direction: column;
 	}
 
@@ -167,6 +188,16 @@ body {
 	#content {
 		width: 90%;
 		max-height: 50%;
+		position: relative;
+		transition: filter 0.5s ease-out;
+	}
+
+	#share_container {
+		position: absolute;
+		bottom: 0;
+		justify-content: center;
+		width: 90%;
+		max-height: 55%;
 	}
 }
 
@@ -185,6 +216,15 @@ body {
 		width: 60%;
 		/* height: 90%; */
 	}
+
+	#share_container {
+		position: absolute;
+		top: 25%;
+		bottom: 25%;
+		right: 0; 
+		width: 50%; 
+		height: 50%; 
+}
 }
 
 #content {
@@ -195,6 +235,10 @@ body {
 #preview {
 	position: relative;
 	color: hsla(0, 0%, 100%, 90%);
+}
+
+.bring-front {
+	z-index: 3;
 }
 
 .centered {
