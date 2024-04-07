@@ -35,8 +35,6 @@ async function load_pic(url, formDataString) {
 	message_container.style.opacity = "0";
 	
 	img_element.classList.remove("out_of_focus");
-	document.getElementById('content').classList.add("out_of_focus");
-	share_container.classList.add("bring-front");
 
 	submit_button.disabled = false;
 	share_button.disabled = false;
@@ -49,14 +47,21 @@ async function load_pic(url, formDataString) {
 	// 	},
 	// 	1 * 1000
 	// )
-
 	setTimeout(
 		async function () {
-			share_container.classList.remove("hidden");
-			
+			img_element.classList.remove("out_of_focus");
 		},
 		1000
 	)
+
+	setTimeout(
+		async function () {
+			document.getElementById('content').classList.add("out_of_focus");
+			share_container.classList.add("bring-front");
+		},
+		150
+	)
+
 
 	share_button.classList.remove("disabled");
 }
@@ -129,6 +134,7 @@ function get_badge(e) {
 	},
 		300
 	);
+	
 	// img_element.style.opacity = "0";
 
 	submit_button.disabled = true;
